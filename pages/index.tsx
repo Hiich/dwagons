@@ -123,7 +123,7 @@ const Home: NextPage = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 1 }}
         >
-          <Image alt={"logo"} src={"/images/shade_cropped.png"} width="700" height="230" />
+          <Image alt={"logo"} src={"/images/shade_cropped.png"} width="700" height="300" />
         </motion.div>
 
         <div className='mt-20 text-center w-full bg-cover h-full' >
