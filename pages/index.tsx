@@ -6,7 +6,7 @@ import abi from "../public/config/abi.json";
 import { useEffect, useState } from 'react';
 import { useEthers } from '@usedapp/core'
 import { Contract, getDefaultProvider } from 'ethers'
-// import Fade from 'react-reveal/Fade';
+import { motion } from 'framer-motion';
 
 const Home: NextPage = () => {
   const { account, deactivate, activateBrowserWallet } = useEthers()
@@ -118,9 +118,13 @@ const Home: NextPage = () => {
             className: "font-attack text-3xl"
           }}
         />
-        <div className='pt-20'>
+        <motion.div className='pt-20'
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1 }}
+        >
           <Image alt={"logo"} src={"/images/shade_cropped.png"} width="700" height="230" />
-        </div>
+        </motion.div>
 
         <div className='mt-20 text-center w-full bg-cover h-full' >
           <div >
