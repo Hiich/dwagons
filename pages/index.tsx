@@ -13,7 +13,6 @@ const Home: NextPage = () => {
   const [mintAmount, setMintAmount] = useState(1);
   const [totalSupply, setTotalSupply] = useState("0");
   const [whitelist, setWhitelist] = useState(false)
-
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
@@ -48,6 +47,19 @@ const Home: NextPage = () => {
   useEffect(() => {
     GetSupply()
   }, [account])
+
+  const checkWallet = async () => {
+    const resp = await fetch(`/api/proof/${account}`, {
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+    if (resp.status == 200)
+      toast.success("You are whitelisted !")
+    else
+      toast.error("You are not whitelisted !")
+  }
+
 
   const MintNft = async () => {
     toast("Here it comes...")
@@ -136,7 +148,11 @@ const Home: NextPage = () => {
             {totalSupply != "7777" ?
               <>
                 <p className='text-white text-3xl font-tiy mt-4'>1 SHADE COSTS 0.005 ETH. <br />1 free mint per whitelist up to 1777 !</p>
-
+                <a
+                  href="https://etherscan.io/address/0xec82993014d026c19864d5c2e90effb5175b35b1" target="_blank" rel="noreferrer"
+                  className='text-white text-3xl font-tiy mt-8'>
+                  Smart contract address : 0xec82993014d026c19864d5c2e90effb5175b35b1
+                </a>
                 <div className='my-10'>
                   {account === undefined ? (
                     <button className='bg-transparent border border-white rounded-xl text-6xl
@@ -196,6 +212,14 @@ const Home: NextPage = () => {
                         onClick={MintNft}>
                         Mint
                       </button>
+
+                      <div>
+                        <button className='bg-transparent text-3xl sm:text-6xl
+                     font-attack px-4 pb-1 hover:scale-110  mt-10 sm:mt-20'
+                          onClick={checkWallet}>
+                          Am I whitelisted ? 
+                        </button>
+                      </div>
                     </div>
                   }
                 </div>
