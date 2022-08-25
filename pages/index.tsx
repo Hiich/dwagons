@@ -50,6 +50,7 @@ const Home: NextPage = () => {
   }, [account])
 
   const MintNft = async () => {
+    toast("Here it comes...")
     //during whitelist check for proof
     const isWhitelist = await SmartContract.isWhitelist()
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
