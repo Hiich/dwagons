@@ -205,7 +205,8 @@ const Home: NextPage = () => {
                 <a className='bg-transparent border border-white rounded-xl text-3xl text-white
                      font-attack px-4 pb-1'
                   href="https://opensea.io/collection/shade-gen1"
-                  target="_blank">
+                  target="_blank"
+                  rel="noreferrer">
                   Buy on Opensea
                 </a>
               </>
