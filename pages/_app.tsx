@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     <DAppProvider config={config}>
       <div className='bg-black bg-no-repeat bg-cover bg-center'
-        style={{ backgroundImage: "url('../images/bg.png')", height: '100vh' }}
+        style={{ backgroundImage: "url('../images/bg.png')", height: "100vh" }}
       >
         <Component {...pageProps} />
       </div>

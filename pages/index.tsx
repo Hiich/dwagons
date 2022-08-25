@@ -141,7 +141,7 @@ const Home: NextPage = () => {
           <Image alt={"logo"} src={"/images/shade_cropped.png"} width="700" height="300" />
         </motion.div>
 
-        <div className='mt-20 text-center w-full bg-cover h-full' >
+        <div className='pt-20 text-center w-full bg-cover h-full' >
           <div >
             <h1 className='text-white text-4xl sm:text-6xl font-attack'>{totalSupply} / 7777</h1>
 
@@ -215,7 +215,7 @@ const Home: NextPage = () => {
 
                       <div>
                         <button className='bg-transparent text-3xl sm:text-6xl
-                     font-attack px-4 pb-1 hover:scale-110  mt-10 sm:mt-20'
+                     font-attack px-4 pb-1 hover:scale-110  pt-10 sm:pt-20'
                           onClick={checkWallet}>
                           Am I whitelisted ? 
                         </button>
@@ -226,7 +226,7 @@ const Home: NextPage = () => {
               </>
               :
               <>
-                <p className='text-white text-3xl font-tiy mt-4'>Sold out !</p>
+                <p className='text-white text-3xl font-tiy pt-4'>Sold out !</p>
                 <a className='bg-transparent border border-white rounded-xl text-3xl text-white
                      font-attack px-4 pb-1'
                   href="https://opensea.io/collection/shade-gen1"
