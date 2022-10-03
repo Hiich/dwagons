@@ -30,10 +30,8 @@ const Home: NextPage = () => {
     setMintAmount(newMintAmount);
   };
 
-  // const cost = 3000000000000000;
-  //
-  const CONTRACT_ADDRESS = "0xec82993014d026c19864d5c2e90eFfB5175b35B1";//0xC8CbFDaa405A959902e8204474d45646461f96cf";
-  const provider = getDefaultProvider("mainnet")
+  const CONTRACT_ADDRESS = "0xeE60688133F85dA0c2A00ff0540c2E8A258b0c29";//0xC8CbFDaa405A959902e8204474d45646461f96cf";
+  const provider = getDefaultProvider("rinkeby")
 
   const SmartContract = new Contract(CONTRACT_ADDRESS, abi, provider)
 
@@ -48,89 +46,46 @@ const Home: NextPage = () => {
     GetSupply()
   }, [account])
 
-  const checkWallet = async () => {
-    const resp = await fetch(`/api/proof/${account}`, {
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-    if (resp.status == 200)
-      toast.success("You are whitelisted !")
-    else
-      toast.error("You are not whitelisted !")
-  }
-
-
   const MintNft = async () => {
-    toast("Here it comes...")
     //during whitelist check for proof
-    const isWhitelist = await SmartContract.isWhitelist()
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     // Prompt user for account connections
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     console.log("Account:", await signer.getAddress());
 
-    const cost = await SmartContract.getCost(mintAmount, account)
-    const totalWeiValue = String(cost[0] as unknown as number);
-
-    if (isWhitelist) {
-      const resp = await fetch(`/api/proof/${account}`, {
-        headers: {
-          Accept: 'application/json',
-        },
-      })
-      if (resp.status == 200) {
-        const response = await resp.json()
-        WLMintNft(response.proof, signer, totalWeiValue)
-      }
-      else
-        toast.error("Not whitelisted. Please wait for public sale.")
-    } else
-      PublicMintNft(signer, totalWeiValue)
-  }
-
-  const WLMintNft = async (proof: any, signer: any, totalWeiValue: any) => {
-
-    console.log("WL Minting...");
-    try {
-      const tx = await SmartContract.connect(signer).mintWithSignature(mintAmount, proof, { value: totalWeiValue })
-      toast.promise(tx.wait(), {
-        loading: "Minting...",
-        success: "Successfully minted !",
-        error: "Minting failed. Please verify that contract is not paused"
-      })
-    } catch (e) {
-      toast.error("Minting failed. Please verify that contract is not paused")
-    }
+    const totalWeiValue = ethers.utils.parseEther("0.1");
+    console.log(totalWeiValue)
+    PublicMintNft(signer, totalWeiValue)
   }
 
   const PublicMintNft = async (signer: any, totalWeiValue: any) => {
     console.log("Public Minting...");
     try {
-      const tx = await SmartContract.connect(signer).mint(mintAmount, { value: totalWeiValue })
+      const tx = await SmartContract.connect(signer).mint(await signer.getAddress(), mintAmount, { value: totalWeiValue })
       toast.promise(tx.wait(), {
         loading: "Minting...",
         success: "Successfully minted !",
         error: "Minting failed. Please verify that contract is not paused"
       })
     } catch (e) {
+      console.log(e)
       toast.error("Minting failed. Please verify that contract is not paused")
     }
   };
 
   return (
-    <div className='h-full z-20' style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+    <div className='h-full z-20' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}>
       <Head>
-        <title>{"Shade NFT"}</title>
-        <meta name="description" content="Shade NFT Collection" />
+        <title>{"Baby Tsuka - $Dwagon NFT"}</title>
+        <meta name="description" content="Baby Tsuka - $Dwagon NFT" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className='flex flex-col justify-center items-center'>
         <Toaster
           toastOptions={{
-            className: "font-attack text-3xl"
+            className: "text-3xl"
           }}
         />
         <motion.div className='pt-20'
@@ -138,25 +93,27 @@ const Home: NextPage = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 1 }}
         >
-          <Image alt={"logo"} src={"/images/shade_cropped.png"} width="700" height="300" />
+          <Image alt={"logo"} src={"/images/logo.png"} width="300" height="300" />
         </motion.div>
 
-        <div className='pt-20 text-center w-full bg-cover h-full' >
+        <div className='pt-20 text-center w-full bg-cover h-full font-dragon' >
           <div >
-            <h1 className='text-white text-4xl sm:text-6xl font-attack'>{totalSupply} / 7777</h1>
+            <h1 className='text-white text-4xl sm:text-6xl'>BabyTsuka</h1>
 
-            {totalSupply != "7777" ?
+            {totalSupply != "250" ?
               <>
-                <p className='text-white text-3xl font-tiy mt-4'>1 SHADE COSTS 0.005 ETH. <br />1 free mint per whitelist up to 1777 !</p>
+                <p className='text-white text-3xl  mt-4 '>1 BABY TSUKA COSTS  0.1 ETH.</p>
+                <p className='text-white text-3xl  mt-4 '>Minted : {totalSupply} / 250</p>
                 <a
                   href="https://etherscan.io/address/0xec82993014d026c19864d5c2e90effb5175b35b1" target="_blank" rel="noreferrer"
-                  className='text-white text-3xl font-tiy mt-8'>
-                  Smart contract address : 0xec82993014d026c19864d5c2e90effb5175b35b1
+                  className='text-white   mt-8'>
+                  Smart contract address : 0xeE60688133F85dA0c2A00ff0540c2E8A258b0c29
                 </a>
+
                 <div className='my-10'>
                   {account === undefined ? (
                     <button className='bg-transparent border border-white rounded-xl text-6xl
-              font-attack px-4 pb-1 text-white'
+                       px-4 pb-1 text-white'
                       onClick={activateBrowserWallet}>
                       Connect
                     </button>
@@ -184,7 +141,7 @@ const Home: NextPage = () => {
                             />
                           </svg>
                         </button>
-                        <span className="text-3xl mx-6 font-attack ">{mintAmount}</span>
+                        <span className="text-3xl mx-6  ">{mintAmount}</span>
                         <button
                           onClick={(e) => {
                             e.preventDefault();
@@ -208,27 +165,19 @@ const Home: NextPage = () => {
                         </button>
                       </div>
                       <button className='bg-transparent border border-white rounded-xl text-6xl
-                     font-attack px-4 pb-1 hover:scale-110'
+                      px-4 pb-1 hover:scale-110'
                         onClick={MintNft}>
                         Mint
                       </button>
-
-                      <div>
-                        <button className='bg-transparent text-3xl sm:text-6xl
-                     font-attack px-4 pb-1 hover:scale-110  pt-10 sm:pt-20'
-                          onClick={checkWallet}>
-                          Am I whitelisted ? 
-                        </button>
-                      </div>
                     </div>
                   }
                 </div>
               </>
               :
               <>
-                <p className='text-white text-3xl font-tiy pt-4'>Sold out !</p>
+                <p className='text-white text-3xl  pt-4'>Sold out !</p>
                 <a className='bg-transparent border border-white rounded-xl text-3xl text-white
-                     font-attack px-4 pb-1'
+                      px-4 pb-1'
                   href="https://opensea.io/collection/shade-gen1"
                   target="_blank"
                   rel="noreferrer">

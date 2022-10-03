@@ -7,11 +7,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        shades: "src('../public/images/shade.png')"
+        bg: "src('/images/bg.jpg')"
       },
       fontFamily: {
         attack: ["attack", "sans-serif"],
-        tiy: ["tiy", "sans-serif"]
+        tiy: ["tiy", "sans-serif"],
+        dragon: ["dragon", "sans-serif"]
       }
     },
   },

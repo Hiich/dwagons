@@ -49,3 +49,8 @@ a {
   font-family: 'tiy';
   src: url('/fonts/tiy.ttf');
 }
+
+@font-face {
+  font-family: 'dragon';
+  src: url('/fonts/dragon.ttf');
+}
