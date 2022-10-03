@@ -30,8 +30,8 @@ const Home: NextPage = () => {
     setMintAmount(newMintAmount);
   };
 
-  const CONTRACT_ADDRESS = "0xeE60688133F85dA0c2A00ff0540c2E8A258b0c29";//0xC8CbFDaa405A959902e8204474d45646461f96cf";
-  const provider = getDefaultProvider("rinkeby")
+  const CONTRACT_ADDRESS = "0x16ea3317ecffb089742dd2ad253f9865d74e05c6";//0xC8CbFDaa405A959902e8204474d45646461f96cf";
+  const provider = getDefaultProvider("mainnet")
 
   const SmartContract = new Contract(CONTRACT_ADDRESS, abi, provider)
 
@@ -53,8 +53,8 @@ const Home: NextPage = () => {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     console.log("Account:", await signer.getAddress());
-
-    const totalWeiValue = ethers.utils.parseEther("0.1");
+    const cost = String(0.1 * mintAmount)
+    const totalWeiValue = ethers.utils.parseEther(cost);
     console.log(totalWeiValue)
     PublicMintNft(signer, totalWeiValue)
   }
@@ -105,15 +105,15 @@ const Home: NextPage = () => {
                 <p className='text-white text-3xl  mt-4 '>1 BABY TSUKA COSTS  0.1 ETH.</p>
                 <p className='text-white text-3xl  mt-4 '>Minted : {totalSupply} / 250</p>
                 <a
-                  href="https://etherscan.io/address/0xec82993014d026c19864d5c2e90effb5175b35b1" target="_blank" rel="noreferrer"
+                  href="https://etherscan.io/address/0x16ea3317ecffb089742dd2ad253f9865d74e05c6" target="_blank" rel="noreferrer"
                   className='text-white   mt-8'>
-                  Smart contract address : 0xeE60688133F85dA0c2A00ff0540c2E8A258b0c29
+                  Smart contract address : 0x16ea3317ecffb089742dd2ad253f9865d74e05c6
                 </a>
 
                 <div className='my-10'>
                   {account === undefined ? (
                     <button className='bg-transparent border border-white rounded-xl text-6xl
-                       px-4 pb-1 text-white'
+                       px-4 pt-3 text-white'
                       onClick={activateBrowserWallet}>
                       Connect
                     </button>
@@ -165,7 +165,7 @@ const Home: NextPage = () => {
                         </button>
                       </div>
                       <button className='bg-transparent border border-white rounded-xl text-6xl
-                      px-4 pb-1 hover:scale-110'
+                      px-4 pt-3 hover:scale-125'
                         onClick={MintNft}>
                         Mint
                       </button>
