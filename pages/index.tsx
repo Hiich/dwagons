@@ -104,11 +104,11 @@ const Home: NextPage = () => {
               <>
                 <p className='text-white text-3xl  mt-4 '>1 BABY TSUKA COSTS  0.1 ETH.</p>
                 <p className='text-white text-3xl  mt-4 '>Minted : {totalSupply} / 250</p>
-                {/* <a
+                <a
                   href="https://etherscan.io/address/0x16ea3317ecffb089742dd2ad253f9865d74e05c6" target="_blank" rel="noreferrer"
                   className='text-white   mt-8'>
                   Smart contract address : 0x16ea3317ecffb089742dd2ad253f9865d74e05c6
-                </a> */}
+                </a>
 
                 <div className='my-10'>
                   {account === undefined ? (
@@ -166,8 +166,7 @@ const Home: NextPage = () => {
                       </div>
                       <button className='bg-transparent border border-white rounded-xl text-6xl
                       px-4 pt-3 hover:scale-125'
-                        // onClick={MintNft}
-                        >
+                        onClick={MintNft}>
                         Mint
                       </button>
                     </div>
