@@ -178,7 +178,7 @@ const Home: NextPage = () => {
                 <p className='text-white text-3xl  pt-4'>Sold out !</p>
                 <a className='bg-transparent border border-white rounded-xl text-3xl text-white
                       px-4 pb-1'
-                  href="https://opensea.io/collection/shade-gen1"
+                  href="https://opensea.io/collection/baby-tsuka-dwagon-genesis-nft-collection"
                   target="_blank"
                   rel="noreferrer">
                   Buy on Opensea
